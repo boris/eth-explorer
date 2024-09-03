@@ -5,3 +5,11 @@ help: ## Show this help
 
 run: ## Run the Flask app in local (debug) mode
 	flask --app app --debug run --host=0.0.0.0
+
+dev-setup: ## Create a virtual environment for development
+	python3 -m venv venv
+	. venv/bin/activate
+	pip install -r requirements.txt
+
+freeze: ## Freeze the dependencies
+	pip freeze > requirements.txt
