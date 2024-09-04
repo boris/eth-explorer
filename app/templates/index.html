@@ -1,0 +1,10 @@
+latest block: {{ latest_block }}
+
+<br></br>
+last 10 blocks:
+{% for block in latest_10_blocks %}
+    <div>
+        <a href="{{ url_for('main.block', block_number=block.number) }}">{{ block.number }}</a> - 0x{{ block.hash.hex() }}
+    </div>
+{% endfor %}
+

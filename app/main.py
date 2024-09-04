@@ -1,48 +1,37 @@
-import json
 import os
-import requests
+from web3 import Web3
+from flask import Blueprint, redirect, url_for, render_template
 
 INFURA_API_KEY = '' or os.environ.get('INFURA_API_KEY')
 ETH_MAINNET_URL = f'https://mainnet.infura.io/v3/{INFURA_API_KEY}'
+web3 = Web3(Web3.HTTPProvider(ETH_MAINNET_URL))
 
-# Default, global headers
-headers = {
-    'Content-Type': 'application/json',
-}
+main = Blueprint('main', __name__)
 
-def get_block_number() -> int:
-    payload = {
-        'jsonrpc': '2.0',
-        'method': 'eth_getBlockByNumber',
-        'params': ['latest', False],
-        'id': 1,
-    }
+def web3_latest_block():
+    latest_block = web3.eth.block_number
+    print(f"Latest block: {latest_block}")
 
-    try:
-        response = requests.post(ETH_MAINNET_URL, headers=headers, data=json.dumps(payload))
-        response.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        print(f"HTTP error: {err}")
+    latest_10_blocks = []
 
-    return int(response.json()['result']['number'], 16)
+    for i in range(latest_block, latest_block - 10, -1):
+        block = web3.eth.get_block(i)
+        latest_10_blocks.append(block)
 
+    return latest_block, latest_10_blocks
 
-def get_block_by_number(block_number: int) -> dict:
-    payload = {
-        'jsonrpc': '2.0',
-        'method': 'eth_getBlockByNumber',
-        'params': [hex(block_number), True],
-        'id': 1,
-    }
+@main.route('/')
+def hello_world():
+    latest_block = web3_latest_block()
+    return render_template('index.html', 
+                           latest_block=latest_block[0],
+                           latest_10_blocks=latest_block[1],
+                           )
 
-    try:
-        response = requests.post(ETH_MAINNET_URL, headers=headers, data=json.dumps(payload))
-        response.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        print(f"HTTP error: {err}")
-
-    return response.json()['result']
+@main.route('/block/<int:block_number>')
+def block(block_number):
+    block = web3.eth.get_block(block_number)
+    return render_template('block.html', block=block)
 
 # Tests
-print(get_block_number())
-print(get_block_by_number(get_block_number()))
+#print(web3_latest_block())
