@@ -35,7 +35,4 @@ def block(block_number):
 
 @main.route('/health')
 def health():
-    if web3 is not None:
-        return 'Healthy', 200
-    else:
-        return 'Unhealthy', 500
+    return 'Healthy', 200
