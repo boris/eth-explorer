@@ -14,4 +14,4 @@ RUN pip install -r requirements.txt
 
 COPY app /app
 
-CMD ['flask', 'run', '--app', 'app', '--host=0.0.0.0']
+CMD ['flask', '--app', 'app', 'run', '--host=0.0.0.0']
