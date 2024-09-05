@@ -33,5 +33,6 @@ def block(block_number):
     block = web3.eth.get_block(block_number)
     return render_template('block.html', block=block)
 
-# Tests
-#print(web3_latest_block())
+@main.route('/health')
+def health():
+    return 'Healthy', 200
