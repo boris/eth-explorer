@@ -14,3 +14,6 @@ A very simple page that will diplay:
 1. Create a python virtual environment (I'm using [pyenv](https://github.com/pyenv/pyenv)), might not be the best way to do it, but it what it is. In any case, I included a `make dev-setup` that will create a virtual environment for you.
 1. Install the requirements: `pip install -r requirements.txt`
 1. Run the app: `make run`
+
+# Deploy
+Currently it's being deployed from a [different repository](https://github.com/boris/kubernetes/tree/main/helm/eth-explorer) and it's running at [eth.borisquiroz.dev](https://eth.borisquiroz.dev/)
