@@ -7,7 +7,7 @@ nodes and do some coding.
 ## What is this?
 A very simple page that will diplay:
 - The last 10-_ish_ blocks mined
-- A like to the block showing what's inside it
+- A link to the block showing what's inside it
 
 # How to run it?
 1. Clone this repo
