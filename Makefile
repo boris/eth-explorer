@@ -20,4 +20,6 @@ freeze: ## Freeze the dependencies
 
 build: ## Build the Docker image
 	docker build -t $(IMAGE):$(GIT_COMMIT_HASH) .
+	docker tag $(IMAGE):$(GIT_COMMIT_HASH) $(IMAGE):latest
 	docker push $(IMAGE):$(GIT_COMMIT_HASH)
+	docker push $(IMAGE):latest
