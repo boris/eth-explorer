@@ -2,6 +2,7 @@
 
 IMAGE := "111285186890.dkr.ecr.us-east-1.amazonaws.com/eth-explorer"
 GIT_COMMIT_HASH := $(shell git rev-parse --short HEAD)
+LATEST_GIT_TAG := $(git describe --tags --abbrev=0)
 export GIT_COMMIT_HASH
 
 help: ## Show this help
@@ -21,5 +22,7 @@ freeze: ## Freeze the dependencies
 build: ## Build the Docker image
 	docker build -t $(IMAGE):$(GIT_COMMIT_HASH) .
 	docker tag $(IMAGE):$(GIT_COMMIT_HASH) $(IMAGE):latest
+	docker tag $(IMAGE):$(GIT_COMMIT_HASH) $(IMAGE):$(LATEST_GIT_TAG)
 	docker push $(IMAGE):$(GIT_COMMIT_HASH)
 	docker push $(IMAGE):latest
+	docker push $(IMAGE):$(LATEST_GIT_TAG)
