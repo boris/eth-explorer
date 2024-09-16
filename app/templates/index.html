@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Etheremum explorer{% endblock %}
+{% block content %}
 latest block: {{ latest_block }}
 
 <br></br>
@@ -8,3 +11,4 @@ last 10 blocks:
     </div>
 {% endfor %}
 
+{% endblock %}

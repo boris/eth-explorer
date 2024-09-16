@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}TX: {{ tx.hash.hex() }}{% endblock %}
+{% block content %}
+<h1>TX: {{ tx.hash.hex() }}</h1>
+<p>Block number: {{ tx.blockNumber }}</p>
+<p>From: {{ tx.from }}</p>
+<p>To: {{ tx.to }}</p>
+<p>Value: {{ tx.value / 1000000000000000000 }} ETH</p>
+<p>Gas: {{ tx.gas }}</p>
+<p>Gas price: {{ tx.gasPrice }}</p>
+{% endblock %}

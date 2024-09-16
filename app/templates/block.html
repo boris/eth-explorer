@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}Block {{ block.number }}{% endblock %}
+
+{% block content %}
 <h1>{{ block.number }}</h1>
 <p>block hash: 0x{{ block.hash.hex() }}</p>
 <p>block timestamp: {{ block.timestamp }}</p>
@@ -6,11 +11,15 @@
 <p>block size: {{ block.size }}</p>
 <p>block gasUsed: {{ block.gasUsed }}</p>
 <p>block gasLimit: {{ block.gasLimit }}</p>
-<p>block transactions: {{ block.transactions }}</p>
+<p>block transactions:</p>
+{% for tx in block.transactions %}
+TX: <a href="{{ url_for('main.transaction', tx_hash=tx.hex())}}">{{ tx.hex() }}</a></br>
+{% endfor %}
 <p>block uncles: {{ block.uncles }}</p>
 <p>block extraData: {{ block.extraData }} (Hex: 0x{{ block.extraData.hex() }})</p>
 <p>block withdrawals:</p>
 {% for withdrawal in block.withdrawals %}
-<p>{{ withdrawal.address }}: {{ withdrawal.amount / 1000000000 }} ETH</p>
+<p>{{ withdrawal.address }}: {{ withdrawal.amount / 1000000000000000000 }} ETH</p>
 {% endfor %}
 
+{% endblock %}
