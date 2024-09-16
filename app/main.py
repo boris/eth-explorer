@@ -33,6 +33,11 @@ def block(block_number):
     block = web3.eth.get_block(block_number)
     return render_template('block.html', block=block)
 
+@main.route('/transaction/<string:tx_hash>')
+def transaction(tx_hash):
+    tx = web3.eth.get_transaction(tx_hash)
+    return render_template('transaction.html', tx=tx)
+
 @main.route('/health')
 def health():
     return 'Healthy', 200
