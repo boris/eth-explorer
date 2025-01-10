@@ -1,14 +1,26 @@
 {% extends "base.html" %}
-{% block title %}Etheremum explorer{% endblock %}
+{% block title %}Etheremum block explorer{% endblock %}
 {% block content %}
-latest block: {{ latest_block }}
 
+<p class="title is-1">Ethereum block explorer</p>
+
+<p class="subtitle">latest block: {{ latest_block }}</p>
 <br></br>
-last 10 blocks:
-{% for block in latest_10_blocks %}
-    <div>
-        <a href="{{ url_for('main.block', block_number=block.number) }}">{{ block.number }}</a> - 0x{{ block.hash.hex() }}
-    </div>
-{% endfor %}
+<h2 class="title is-2">last 10 blocks:</h2>
+        <table class="table is-stripped is-narrow is-hoverable is-half">
+            <thead>
+                <tr>
+                    <th>Block number</th>
+                    <th>Hash</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for block in latest_10_blocks %}
+                <tr>
+                    <td><a href="{{ url_for('main.block', block_number=block.number) }}">{{ block.number }}</a></td>
+                    <td>0x{{ block.hash.hex() }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
 
 {% endblock %}
