@@ -4,9 +4,18 @@
 
 <p class="title is-1">Ethereum block explorer</p>
 
-<p class="subtitle">latest block: {{ latest_block }}</p>
+<p class="title is-2">Available endpoints:
+<ul>
+    <li>Block id: /block_id</li>
+    <li>Block hash: /block_hash</li>
+    <li>Transaction hash: /tx_hash</li>
+    <li>Address: /address</li>
+</ul>
+</p>
 <br></br>
-<h2 class="title is-2">last 10 blocks:</h2>
+<p class="title is-3">Latest block: {{ latest_block }}</p>
+<br></br>
+<h2 class="title is-2">Last 10 blocks:</h2>
         <table class="table is-stripped is-narrow is-hoverable is-half">
             <thead>
                 <tr>
@@ -22,5 +31,6 @@
                 </tr>
             {% endfor %}
             </tbody>
+
 
 {% endblock %}
